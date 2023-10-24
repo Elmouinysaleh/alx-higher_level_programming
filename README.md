@@ -12,4 +12,5 @@ Simultaneously, I continued to reinforce and expand my skills in C and shell scr
 * [0x03. Python - Data Structures: Lists, Tuples](./0x03-python-data_structures)
 * [0x04-python-more_data_structures](./0x04-python-more_data_structures)
 * [0x05-python-exceptions](./0x05-python-exceptions)
+* [0x06-python-classes](./0x06-python-classes)
 
