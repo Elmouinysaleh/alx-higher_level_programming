@@ -1,58 +1,89 @@
 #!/usr/bin/python3
-"""Solves the N-queens puzzle"""
+""" defines a Rectangle class"""
 
-import sys
 
-def is_safe(board, row, col, n):
-    # Check the left side of the current row
-    for i in range(col):
-        if board[row][i] == 1:
-            return False
+class Rectangle:
+    """Rectangle Class"""
+    number_of_instances = 0
+    print_symbol = '#'
 
-    # Check upper diagonal on the left side
-    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
-        if board[i][j] == 1:
-            return False
+    def __init__(self, width=0, height=0):
+        """ Init Method """
+        self.width = width
+        self.height = height
+        Rectangle.number_of_instances += 1
 
-    # Check lower diagonal on the left side
-    for i, j in zip(range(row, n, 1), range(col, -1, -1)):
-        if board[i][j] == 1:
-            return False
+    @property
+    def width(self):
+        """getter def"""
+        return self.__width
 
-    return True
+    @width.setter
+    def width(self, value):
+        """setter def"""
+        if type(value) is not int:
+            raise TypeError('width must be an integer')
+        if value < 0:
+            raise ValueError('width must be >= 0')
+        self.__width = value
 
-def solve_nqueens(n):
-    if n < 4:
-        print("N must be at least 4")
-        sys.exit(1)
+    @property
+    def height(self):
+        """getter def"""
+        return self.__height
 
-    def print_solution(board):
-        for row in board:
-            print("".join(["Q" if col else "." for col in row]))
+    @height.setter
+    def height(self, value):
+        """setter def"""
+        if type(value) is not int:
+            raise TypeError('height must be an integer')
+        if value < 0:
+            raise ValueError('height must be >= 0')
+        self.__height = value
 
-    def solve_util(board, col):
-        if col == n:
-            print_solution(board)
-            print()  # Empty line between solutions
-            return
+    def area(self):
+        """define area def"""
+        return self.__width * self.__height
 
-        for i in range(n):
-            if is_safe(board, i, col, n):
-                board[i][col] = 1
-                solve_util(board, col + 1)
-                board[i][col] = 0
+    def perimeter(self):
+        """define perimeter def"""
+        if self.__width == 0 or self.__height == 0:
+            return 0
+        return(self.__width * 2) + (self.__height * 2)
 
-    board = [[0 for _ in range(n)] for _ in range(n)]
-    solve_util(board, 0)
+    def __str__(self):
+        """define informal print str"""
+        if self.__width == 0 or self.__height == 0:
+            return ""
+        else:
+            hsh = str(self.print_symbol)
+            return ((hsh*self.__width + "\n")*self.__height)[:-1]
 
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: nqueens N")
-        sys.exit(1)
+    def __repr__(self):
+        """define official print repr"""
+        return 'Rectangle({}, {})'.format(self.__width, self.__height)
 
-    try:
-        n = int(sys.argv[1])
-        solve_nqueens(n)
-    except ValueError:
-        print("N must be a number")
-        sys.exit(1)
+    def __del__(self):
+        """define delete method"""
+        Rectangle.number_of_instances -= 1
+        print('Bye rectangle...')
+
+    @staticmethod
+    def bigger_or_equal(rect_1, rect_2):
+        """
+            Biggest Rectangle (Rectangle)
+        """
+        if not isinstance(rect_1, Rectangle):
+            raise TypeError("rect_1 must be an instance of Rectangle")
+        if not isinstance(rect_2, Rectangle):
+            raise TypeError("rect_2 must be an instance of Rectangle")
+        Area1 = rect_1.area()
+        Area2 = rect_2.area()
+        if Area1 >= Area2:
+            return rect_1
+        return rect_2
+
+    @classmethod
+    def square(cls, size=0):
+        """ Returns a new Rectangle instance """
+        return (cls(size, size))
