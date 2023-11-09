@@ -27,7 +27,11 @@ You will also learn about:
 - Serialization/Deserialization
 - JSON
 
-[![Watch the video][(https://i.stack.imgur.com/Vp2cE.png](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/331/giphy.mp4))]
+
+
+https://github.com/Elmouinysaleh/alx-higher_level_programming/assets/36488900/8dedea42-7dfd-4227-b93b-0a63f876fccd
+
+
 
 ## *Resources:*
 
