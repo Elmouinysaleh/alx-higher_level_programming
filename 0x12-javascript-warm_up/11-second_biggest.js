@@ -1,8 +1,14 @@
 #!/usr/bin/node
-if (process.argv.length <= 3) {
-  console.log('0');
-} else {
-  const arr = process.argv.slice(2).map(Number);
-  const second = arr.sort(function (a, b) { return b - a; })[1];
-  console.log(second);
+
+function findSecondLargest (args) {
+  if (args.length <= 1) {
+    return 0;
+  }
+
+  const uniqueArgs = [...new Set(args)];
+  uniqueArgs.sort((a, b) => b - a);
+  return uniqueArgs[1];
 }
+
+const args = process.argv.slice(2).map(Number);
+console.log(findSecondLargest(args));
